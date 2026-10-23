@@ -3,22 +3,36 @@
 
 <head>
     <meta charset="utf-8">
+    <title>CCN</title>
     <meta name="robots" content="noindex">
-    <meta name="合併幾個簡單的xlsx檔案用。">
-    <title>Check Normal</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <script type="module" src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
+    <meta name="各種小小工具，花費時間多餘實用價值。">
+    <link rel="icon" type="image/svg+xml" href="/assets/icon/run.svg">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/index.css">
 </head>
 
 <body>
-    <label id="drop-zone">
-        將檔案拖曳至此
-        <input type="file" accept=".xlsx" id="files-input" multiple>
-    </label>
-    <div>
-        <p id="files-list"></p>
+    <div class="grid-container">
+        <div class="grid-item card-button">
+            <a href="/sites/cal2cal.html" class="full-link">
+                <img src="/assets/icon/calendar.svg">
+                Cal2Cal
+            </a>
+        </div>
+        <div class="grid-item card-button">
+            <a href="/sites/mermerge.html" class="full-link">
+                <img src="/assets/icon/compress.svg">
+                MerMerge
+            </a>
+        </div>
+
     </div>
-    <script src="js/main.js"></script>
 </body>
+
+<footer>
+    <small>
+        Hello There :> Welcome. This is useless site.
+    </small>
+</footer>
 
 </html>

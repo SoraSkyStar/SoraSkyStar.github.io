@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="utf-8">
+    <title>MerMerge</title>
+    <meta name="robots" content="noindex">
+    <meta name="合併幾個簡單的xlsx檔案用。">
+    <link rel="icon" type="image/svg+xml" href="/assets/icon/run.svg">
+    <link rel="stylesheet" href="/assets/css/mermerge.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/filedrop.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
+</head>
+
+<body>
+    <div class="grid-container">
+        <label id="drop-zone" class="grid-item">
+            將檔案拖曳至此
+            <input type="file" accept=".xlsx" id="files-input" multiple>
+        </label>
+        <p id="files-list" class="grid-item"></p>
+        <a id="return-button" href="/index.html" class="grid-item">
+            <img src="/assets/icon/home.svg">
+            Return Home
+        </a>
+    </div>
+    <script src="/assets/js/mermerge.js"></script>
+
+</body>
+<footer>
+    <small>
+        Hello There :> Welcome. This is useless site.
+    </small>
+</footer>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="utf-8">
+    <title>Cal2Cal</title>
+    <meta name="robots" content="noindex">
+    <meta name="班表轉匯入google的格式">
+    <link rel="icon" type="image/svg+xml" href="/assets/icon/run.svg">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/mermerge.css">
+    <link rel="stylesheet" href="/assets/css/cal2cal.css">
+    <link rel="stylesheet" href="/assets/css/filedrop.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
+</head>
+
+<body>
+    <div class="grid-container">
+        <div class="grid-item">
+            <p>
+                員工ID：
+                <input id="input-staff-id" minlength="7" maxlength="7" type="text">
+            </p>
+            <p>
+                檔案：
+                <label id="drop-zone">
+                    將檔案拖曳至此
+                    <input type="file" accept=".xlsx" id="files-input">
+                </label>
+            </p>
+        </div>
+        <p id="process-output" class="grid-item"></p>
+        <a id="return-button" href="/index.html" class="grid-item">
+            <img src="/assets/icon/home.svg">
+            Return Home
+        </a>
+    </div>
+    <script src="/assets/js/cal2cal.js"></script>
+</body>
+<footer>
+    <small>
+        Hello There :> Welcome. This is useless site.
+    </small>
+</footer>
+
+</html>
