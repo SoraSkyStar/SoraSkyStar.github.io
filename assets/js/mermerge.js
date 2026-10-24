@@ -57,7 +57,6 @@ function classfyFiles(files, filename) {
 }
 
 async function mergeRows(files) {
-  const wb = new ExcelJS.Workbook();
   const rows = [];
 
   for (const file of files) {

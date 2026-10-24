@@ -24,7 +24,7 @@
   height: 8vh;
 }
 
-.grid-item {
+.index-grid-item {
   display: flex;
   background-color: #a9a6a6;
   text-align: center;
@@ -32,6 +32,6 @@
   border-radius: 4px ;
 }
 
-.grid-item:hover {
+.index-grid-item:hover {
   background-color: azure;
 }

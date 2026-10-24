@@ -23,3 +23,23 @@ footer{
   position: fixed;
   color: antiquewhite;
 }
+
+#return-button{
+  color: bisque;
+  text-decoration: none;
+  position: fixed;
+  padding-bottom: 1em;
+  text-align: center;
+  bottom: 2em;
+  width: 100%;
+  margin: 0% auto;
+}
+
+.grid-item {
+  margin: 0 auto;
+  padding-left: 2em;
+  padding-right: 2em;
+  max-width: 90%;
+  color: aliceblue;
+  border-radius: 4px;
+}
