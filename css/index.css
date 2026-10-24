@@ -1,0 +1,37 @@
+.card-button {
+  position: relative;
+}
+
+.full-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: aquamarine;
+}
+
+.full-link:hover {
+  color: crimson;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+  padding: 2%;
+  height: 8vh;
+}
+
+.index-grid-item {
+  display: flex;
+  background-color: #a9a6a6;
+  text-align: center;
+  border: 1px solid #cccccc;
+  border-radius: 4px ;
+}
+
+.index-grid-item:hover {
+  background-color: azure;
+}

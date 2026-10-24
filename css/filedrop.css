@@ -1,0 +1,13 @@
+#files-input {
+  display: none;
+}
+
+#drop-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20dvh;
+  margin: 0 auto;
+  border: 1px dashed #cccccc;
+  cursor: pointer;
+}

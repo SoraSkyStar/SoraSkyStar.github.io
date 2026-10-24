@@ -3,14 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Cal2Cal</title>
+    <title>Cal2Cal - CCN</title>
     <meta name="robots" content="noindex">
     <meta name="班表轉匯入google的格式">
     <link rel="icon" type="image/svg+xml" href="/assets/icon/run.svg">
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/mermerge.css">
-    <link rel="stylesheet" href="/assets/css/cal2cal.css">
     <link rel="stylesheet" href="/assets/css/filedrop.css">
+    <link rel="stylesheet" href="/assets/css/cal2cal.css">
     <script type="module" src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
 </head>
 
@@ -25,11 +24,18 @@
                 檔案：
                 <label id="drop-zone">
                     將檔案拖曳至此
-                    <input type="file" accept=".xlsx" id="files-input">
+                    <input type="file" accept=".xlsm" id="files-input">
                 </label>
             </p>
         </div>
-        <p id="process-output" class="grid-item"></p>
+        <div class="grid-item">
+            <button id="btn-process">
+                轉換
+            </button>
+        </div>
+        <div class="grid-item">
+            <p id="process-output"></p>
+        </div>
         <a id="return-button" href="/index.html" class="grid-item">
             <img src="/assets/icon/home.svg">
             Return Home
