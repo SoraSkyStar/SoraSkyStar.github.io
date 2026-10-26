@@ -112,7 +112,7 @@ async function startProcess(e) {
           const startMinutes = date.getMinutes();
           const startTime = `${formatHRs(startHours)}:${formatMINs(startMinutes)} ${startHours >= 12 ? "PM" : "AM"}`;
 
-          const shift = [shiftCode, startDate, startTime];
+          const shift = [shiftCode.toSrting(), startDate, startTime];
           shiftCSV.push(shift);
         }
       }
@@ -131,22 +131,25 @@ async function startProcess(e) {
 
 function formatHRs(hrs) {
   const hr = hrs > 12 ? hrs - 12 : hrs;
-  return hr < 10 ? `0${hr}` : `${hr}`;
+  return hr < 10 ? `0${hr}` : `${hr}`; // 補足位數 字串格式
 }
 
 function formatMINs(mins) {
-  return mins > 0 ? `${mins}` : `00`;
+  return mins > 10 ? `${mins}` : `0${mins}`; // 補足位數 字串格式
 }
 
 function parseShiftCode(shiftCode, date) {
   shiftCode = shiftCode.trim();
-  if (shiftCode[0] == "T") {
+  // 先把訓練班表轉通用班表
+  if (shiftCode[0] == "T") { // 訓練班表
     shiftCode = trainingShift[parseInt(shiftCode.slice(1)) - 1];
-  }
-  if (shiftCode.includes("H") || shiftCode.includes("I")) {
+  } 
+  if (shiftCode.includes("H") || shiftCode.includes("I")) { // 整點班表
     date.setHours(parseInt(shiftCode.slice(0, 2)), 0);
-  } else if (shiftCode.includes("U") || shiftCode.includes("V")) {
+  } else if (shiftCode.includes("U") || shiftCode.includes("V")) { // 半班表
     date.setHours(parseInt(shiftCode.slice(0, 2)), 30);
+  } else if(shiftCode == "001"){ // 辦公室班表
+    date.setHours(8,0); // 設定成最早八點整
   }
   return date;
 }
