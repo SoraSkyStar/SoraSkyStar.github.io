@@ -23,30 +23,30 @@ const monthName = [
 ];
 
 const allTaskColumns = [
-  { header: "Pkg ID", key: "pkgID", width: 12 },
-  { header: "Pkg Serial", key: "pkgSerial", width: 20 },
+  { header: "Pkg ID", key: "pkgID", width: 20 },
+  { header: "Pkg Serial", key: "pkgSerial", width: 10 },
   { header: "Pkg Task Type", key: "pkgTaskType", width: 12 },
-  { header: "Task ID", key: "taskID", width: 12 },
-  { header: "Proc Rev", key: "procRev", width: 12 },
-  { header: "WO", key: "wo", width: 12 },
-  { header: "WO Task", key: "woTask", width: 12 },
-  { header: "Task Title", key: "taskTitle", width: 45 },
+  { header: "Task ID", key: "taskID", width: 23 },
+  { header: "Proc Rev", key: "procRev", width: 8 },
+  { header: "WO", key: "wo", width: 10 },
+  { header: "WO Task", key: "woTask", width: 8 },
+  { header: "Task Title", key: "taskTitle", width: 65 },
   { header: "Pkg Task Status", key: "pkgTaskStatus", width: 12 },
 ];
 
 const partActColumns = [
   { header: "Package", key: "package", width: 20 },
-  { header: "Model", key: "model", width: 12 },
-  { header: "Type", key: "type", width: 12 },
-  { header: "Work Order", key: "workOrder", width: 12 },
-  { header: "WO Task", key: "woTask", width: 12 },
-  { header: "Task Title", key: "taskTitle", width: 45 },
+  { header: "Model", key: "model", width: 10 },
+  { header: "Type", key: "type", width: 5 },
+  { header: "Work Order", key: "workOrder", width: 10 },
+  { header: "WO Task", key: "woTask", width: 8 },
+  { header: "Task Title", key: "taskTitle", width: 65 },
   { header: "MQ Trx", key: "mqTrx", width: 20 },
-  { header: "Part", key: "part", width: 20 },
-  { header: "Description", key: "description", width: 20 },
+  { header: "Part", key: "part", width: 25 },
+  { header: "Description", key: "description", width: 30 },
   { header: "Qty", key: "qty", width: 8 },
   { header: "Unit", key: "unit", width: 8 },
-  { header: "Avail Status", key: "availStatus", width: 12 },
+  { header: "Avail Status", key: "availStatus", width: 8 },
 ];
 
 dropZone.addEventListener("dragover", (e) => {
@@ -75,7 +75,6 @@ async function dropHandler(ev) {
   const files = [...ev.dataTransfer.items]
     .map((item) => item.getAsFile())
     .filter((file) => file.name.includes(".xlsx"));
-  //   console.log(files);
   displayFilesList(files);
 
   const fileCatalog = [
@@ -88,7 +87,7 @@ async function dropHandler(ev) {
       fileType[1],
     );
     if (rows.length > 0) {
-      await writeRow2File(fileType[0], fileType[0], rows);
+      await writeRow2File(fileType[0], fileType[0], fileType[1], rows);
     }
   }
 }
@@ -118,35 +117,46 @@ async function filterAndMergeRows(files, columns) {
 
     const ws = fileWb.worksheets[0];
 
-    console.log(`Open ${file.name}, ${ws.name}, ${ws.rowCount}.`);
+    console.log(`Open ${file.name}, ${ws.name}, ${ws.actualRowCount}.`);
     // 先取得每個標題的位子
+    
+    if (ws.actualRowCount <= 1){
+      continue;
+    }
+
     const titleRow = ws.getRow(1);
-    const titleIndex = [];
+    
+    const titleIndex = columns.map((column) => [
+      column.key,
+      titleRow.values.indexOf(column.header)
+    ]);
 
-    columns.forEach((column) => {
-      titleIndex.push(titleRow.values.indexOf(column.header));
-    });
-
-    ws.eachRow((row, rowNumber) => {
-      console.log(`第 ${rowNumber} 列:`, row.values);
-      const newRow = [];
-      titleIndex.forEach((index) => {
-        if (index ^ -1) {
-          newRow.push(row.values[index]);
-        }
+    for ( let rowNum = 2; rowNum <= ws.actualRowCount; rowNum++ ){
+      const row = ws.getRow(rowNum);
+      const newRow = {};
+      console.log(`第 ${rowNum} 列:`, row.values);
+      titleIndex.forEach(([key, index]) => {
+        newRow[key] = (index !== -1 ? row.values[index] : null);
       });
       rows.push(newRow);
-    });
-    rows.push([]);
+    }
+    rows.push({}); // 隔開工包
   }
+  rows.pop();
   return rows;
 }
 
-async function writeRow2File(filename, wbname, rows) {
+async function writeRow2File(filename, wbname, titleFormat, rows) {
   const wb = new ExcelJS.Workbook();
-  const ws = wb.addWorksheet(wbname);
+  const ws = wb.addWorksheet(wbname, {
+    views:[{state:'frozen', ySplit: 1}]
+  });
 
-  ws.addRows(rows);
+  ws.columns = titleFormat;
+
+  rows.forEach((row) => {
+    ws.addRow(row);
+  })
 
   const today = new Date();
   filename = `${filename}_${monthName[today.getMonth()]}-${today.getDate()}-${today.getFullYear()}`;
