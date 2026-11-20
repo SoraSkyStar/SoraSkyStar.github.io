@@ -112,7 +112,7 @@ async function startProcess(e) {
           const startMinutes = date.getMinutes();
           const startTime = `${formatHRs(startHours)}:${formatMINs(startMinutes)} ${startHours >= 12 ? "PM" : "AM"}`;
 
-          const shift = [shiftCode.toSrting(), startDate, startTime];
+          const shift = [shiftCode.toString(), startDate, startTime];
           shiftCSV.push(shift);
         }
       }
